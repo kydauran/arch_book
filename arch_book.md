@@ -7,7 +7,7 @@ Trust, but verify mindset should always be applied.
 
 https://archlinux.org/download/
 
-Tailored for August 2024 ISO (revised @ 8/30/24).
+Tailored for August 2024 ISO (revised @ 10/3/24).
 
 ## 0 - Preliminary steps prior installation
 
@@ -201,7 +201,7 @@ Parallel compilation
 
 	# passwd
 
-**Bootloader **
+**Bootloader**
 
 	# bootctl install
 
@@ -282,7 +282,7 @@ Should be good to go.
 
 **Install apps**
 
-	# pacman -S yubikey-manager-qt obs-studio qbittorrent steam krita-plugin-gmic signal-desktop firefox-i18n-en-us audacity pycharm-community-edition thunar pandoc-cli chromium mkvtoolnix-gui
+	# pacman -S yubikey-manager-qt obs-studio qbittorrent steam krita-plugin-gmic signal-desktop firefox-i18n-en-us audacity pycharm-community-edition thunar pandoc-cli chromium mkvtoolnix-gui teamspeak3
 
 **Install KDE with its apps (exclude ^5, ^7, ^18 and ^48 from group ; I dont want RDP / flatpak on a mutable system)**
 
@@ -345,7 +345,7 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 **Install stuff from AUR**
 
-	$ paru -S mullvad-vpn-bin mp3tag android-sdk-build-tools qflipper-bin protontricks upscayl-bin
+	$ paru -S mullvad-vpn-bin mp3tag android-sdk-build-tools qflipper-bin protontricks proton-ge-custom-bin r2modman-bin
 
 **Install NvChad**
 
