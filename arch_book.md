@@ -3,11 +3,11 @@
 Always verify your ISO file (b2sum/sha256 ; gpg/pacman-key).
 I won't cover it because it should be automatic anyway thanks to torrent, however it's good habit to verify everything you download, when it's possible.
 
-Trust, but verify mindset should always be applied.
+"Trust, but verify" mindset should always be applied.
 
 https://archlinux.org/download/
 
-Tailored for August 2024 ISO (revised @ 10/3/24).
+Tailored for October 2024 ISO (revised @ 10/5/24).
 
 ## 0 - Preliminary steps prior installation
 
@@ -17,7 +17,7 @@ Tailored for August 2024 ISO (revised @ 10/3/24).
 
 **Erase disk pt. 2**
 
-	# cryptsetup open --type plain --key-file /dev/urandom --sector-size 4096 /dev/nvme0n1 to_be_erased 
+	# cryptsetup open --type plain --key-file /dev/urandom --sector-size 4096 /dev/nvme0n1 to_be_erased
 	# dd if=/dev/zero of=/dev/mapper/to_be_erased status=progress bs=512K
 	# cryptsetup close to_be_erased
 	# reboot
@@ -70,14 +70,14 @@ Tailored for August 2024 ISO (revised @ 10/3/24).
 **Formating**
 
 	# mkfs.ext4 /dev/volgroup/root
-	# mkfs.xfs /dev/volgroup/home
+	# mkfs.ext4 /dev/volgroup/home
 	# mkfs.fat -F32 /dev/nvme0n1p1
 
 **Mounting**
 
 	# mount /dev/volgroup/root /mnt
 	# mount --mkdir /dev/volgroup/home /mnt/home
-	# mount --mkdir /dev/nvme0n1p1 /mnt/boot  
+	# mount --mkdir /dev/nvme0n1p1 /mnt/boot
 
 ## 1 - Installation of the system
 
@@ -95,7 +95,7 @@ Tailored for August 2024 ISO (revised @ 10/3/24).
 
 **Verify it's correct (also edit fmask/dmask to 0077)**
 
-	# less /mnt/etc/fstab
+	# vim /mnt/etc/fstab
 
 **Chroot**
 
@@ -121,19 +121,43 @@ LANG=en_US.UTF-8
 LC_ALL=C
 ```
 
-**Console language**
+**Set console language**
 
 	# nvim /etc/vconsole.conf
 
+```
 KEYMAP=us
+```
 
 **Hostname**
 
 	# nvim /etc/hostname
 
-**Activate multilib repo and ILoveCandy on /etc/pacman.conf**
+```
+twirl
+```
+
+**Uncomment multilib repo and add ILoveCandy to "Misc options" on /etc/pacman.conf**
 
 	# nvim /etc/pacman.conf
+
+```
+# Misc options
+UseSyslog
+Color
+#NoProgressBar
+CheckSpace
+VerbosePkgLists
+ParallelDownloads = 7
+DownloadUser = alpm
+#DisableSandbox
+ILoveCandy
+```
+
+```
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+```
 
 **Update !**
 
@@ -153,9 +177,14 @@ KEYMAP=us
 
 	# nvim /etc/systemd/journald.conf
 
-**Time servers**
+```
+[Journal]
+ForwardToSyslog=yes
+```
 
-	# bat /etc/systemd/timesyncd.conf
+**Set time servers**
+
+	# nvim /etc/systemd/timesyncd.conf
 
 ```
 [Time]
@@ -165,7 +194,7 @@ FallbackNTP=0.pool.ntp.org 1.pool.ntp.org 0.fr.pool.ntp.org
 
 **Repos optimisation**
 
-	# bat /etc/xdg/reflector/reflector.conf
+	# nvim /etc/xdg/reflector/reflector.conf
 
 ```
 --save /etc/pacman.d/mirrorlist
@@ -181,15 +210,15 @@ Remove any -march and -mtune CFLAGS, then add -march=native in /etc/makepkg.conf
 
 	# CFLAGS="-march=native -O2 -pipe ..."
 
-Add -C target-cpu=native to RUSTFLAGS: 
+Add -C target-cpu=native to RUSTFLAGS:
 
 	# RUSTFLAGS="-C opt-level=2 -C target-cpu=native"
 
-Parallel compilation
+Adjust parallel compilation :
 
 	# MAKEFLAGS="-j$(nproc)"
 
-**Modify /etc/mkinitcpio.conf**
+**Modify /etc/mkinitcpio.conf HOOKS**
 
 	# HOOKS=(base systemd autodetect microcode modconf keyboard sd-vconsole block sd-encrypt lvm2 filesystems fsck)
 
@@ -219,13 +248,13 @@ editor no
 	# nvim /boot/loader/entries/arch.conf
 
 ```
-title   Arch Linux zen    
-linux   /vmlinuz-linux-zen  
-initrd  /initramfs-linux-zen.img  
+title   Arch Linux zen
+linux   /vmlinuz-linux-zen
+initrd  /initramfs-linux-zen.img
 options rd.luks.name=device-UUID=cryptedlvm root=/dev/volgroup/root rw quiet splash nvidia_drm.modeset=1
 ```
 
-Tip : to get the device-UUID easily, you can run this into nvim :
+Tip : to get the device-UUID easily, you can run this into nvim or vim :
 
 	# :read ! blkid /dev/nvme0n1p2
 
@@ -235,7 +264,7 @@ Tip : to get the device-UUID easily, you can run this into nvim :
 
 **Unmount everything, then reboot**
 
-	# umount -R /mnt	
+	# umount -R /mnt
 	# reboot
 
 ## 1.5 - Post-installation (the fun begins)
@@ -282,7 +311,7 @@ Should be good to go.
 
 **Install apps**
 
-	# pacman -S yubikey-manager-qt obs-studio qbittorrent steam krita-plugin-gmic signal-desktop firefox-i18n-en-us audacity pycharm-community-edition thunar pandoc-cli chromium mkvtoolnix-gui teamspeak3
+	# pacman -S yubikey-manager-qt obs-studio qbittorrent steam krita-plugin-gmic signal-desktop audacity pycharm-community-edition thunar pandoc-cli chromium mkvtoolnix-gui teamspeak3
 
 **Install KDE with its apps (exclude ^5, ^7, ^18 and ^48 from group ; I dont want RDP / flatpak on a mutable system)**
 
@@ -296,7 +325,7 @@ Should be good to go.
 
 	# systemctl enable bluetooth
 
-**Activate sudo for wheel usergroup**
+**Activate sudo for wheel usergroup, or use run0**
 
 	# EDITOR=nvim visudo
 	
@@ -325,11 +354,11 @@ and ... reboot ? you should now have a functional GUI.
 
 **Improve ZSH**
 
-	$ nvim .zshrc 
+	$ nvim .zshrc
 
 At EOF, add :
 
-```  
+```
 eval "$(mcfly init zsh)"
 
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
