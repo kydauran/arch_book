@@ -384,8 +384,18 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 Panel Colorizer is pretty good (via "Install a new widget" within KDE)
 
+**Improve font readability**
+
+In /etc/environment, add :
+
+```
+FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0"
+```
+
 ## 99 - Sources used 
 
 https://wiki.archlinux.org/
 
 https://wiki.archlinux.org/title/User:Bai-Chiang/Arch_Linux_installation_with_unified_kernel_image_(UKI),_full_disk_encryption,_secure_boot,_btrfs_snapshots,_and_common_setups
+
+https://blog.aktsbot.in/no-more-blurry-fonts.html
