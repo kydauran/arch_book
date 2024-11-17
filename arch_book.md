@@ -7,7 +7,7 @@ I won't cover it because it should be automatic anyway thanks to torrent, howeve
 
 https://archlinux.org/download/
 
-Tailored for October 2024 ISO (revised @ 10/5/24).
+Tailored for November 2024 ISO (revised @ 11/17/24).
 
 ## 0 - Preliminary steps prior installation
 
@@ -87,7 +87,7 @@ Tailored for October 2024 ISO (revised @ 10/5/24).
 
 **Install the base system (please don't get a seizure over this one)**
 
-	# pacstrap -K /mnt base base-devel linux-zen linux-zen-headers linux-firmware yt-dlp nvtop ncdu lf tldr btop arch-audit rkhunter ripgrep duf dust intel-ucode zmap nmap john android-tools android-udev signify fdupes eza bat hdparm sdparm smartmontools fd mcfly sd hyperfine gping xdg-user-dirs curlie xh dog neovim grml-zsh-config lvm2 arp-scan fastfetch tcpdump reflector pacman-contrib man-db man-pages texinfo zsh-{completions,autosuggestions,history-substring-search,syntax-highlighting} networkmanager lazygit gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} croc exfat-utils btrfs-progs xfsprogs firewalld sbctl inter-font noto-fonts-{cjk,extra,emoji} ttf-mononoki-nerd nmon iotop fio netscanner unrar
+	# pacstrap -K /mnt base base-devel linux-zen linux-zen-headers linux-firmware yt-dlp nvtop ncdu lf tldr btop arch-audit rkhunter ripgrep duf dust intel-ucode zmap nmap john android-tools android-udev signify fdupes eza bat hdparm sdparm smartmontools fd mcfly sd hyperfine gping xdg-user-dirs curlie xh dog neovim grml-zsh-config lvm2 arp-scan fastfetch tcpdump reflector pacman-contrib man-db man-pages texinfo zsh-{completions,autosuggestions,history-substring-search,syntax-highlighting} networkmanager lazygit gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} croc exfat-utils btrfs-progs xfsprogs firewalld dnsmasq swtpm sbctl inter-font noto-fonts-{cjk,extra,emoji} ttf-mononoki-nerd nmon iotop fio netscanner unrar
 
 **Generate fstab file**
 
@@ -311,7 +311,7 @@ Should be good to go.
 
 **Install apps**
 
-	# pacman -S yubikey-manager-qt obs-studio qbittorrent steam krita-plugin-gmic signal-desktop audacity pycharm-community-edition thunar pandoc-cli chromium mkvtoolnix-gui teamspeak3
+	# pacman -S yubikey-manager-qt obs-studio qbittorrent steam krita-plugin-gmic signal-desktop audacity pycharm-community-edition thunar pandoc-cli chromium mkvtoolnix-gui teamspeak3 virt-manager
 
 **Install KDE with its apps (exclude ^5, ^7, ^18 and ^48 from group ; I dont want RDP / flatpak on a mutable system)**
 
@@ -397,5 +397,7 @@ FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0"
 https://wiki.archlinux.org/
 
 https://wiki.archlinux.org/title/User:Bai-Chiang/Arch_Linux_installation_with_unified_kernel_image_(UKI),_full_disk_encryption,_secure_boot,_btrfs_snapshots,_and_common_setups
+
+https://wiki.archlinux.org/title/Libvirt
 
 https://blog.aktsbot.in/no-more-blurry-fonts.html
