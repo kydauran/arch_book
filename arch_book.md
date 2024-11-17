@@ -172,6 +172,7 @@ Include = /etc/pacman.d/mirrorlist
 	# systemctl enable pcscd
 	# systemctl enable reflector
 	# systemctl enable reflector.timer
+ 	# systemctl enable libvirtd
 
 **Uncomment "ForwardToSyslog=no" and replace 'no' by 'yes'**
 
