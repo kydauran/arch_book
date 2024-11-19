@@ -313,7 +313,7 @@ It should be good to go.
 
 **Install virtualisation related packages**
 	
-	# pacman -S edk2-ovmf guestfs-tools libosinfo libvirt qemu-full qemu-img swtpm virt-install
+	# pacman -S dnsmasq edk2-ovmf guestfs-tools iptables-nft libosinfo libvirt qemu-full qemu-img swtpm virt-install
 
 **Install GUI apps**
 
