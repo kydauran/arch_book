@@ -353,6 +353,10 @@ It should be good to go.
 	$ sudo passwd -l root
 	$ sudo passwd -d root
 
+ **Add user to group libvirt**
+
+ 	$ sudo gpasswd -a kydauran libvirt
+
 and ... reboot ? you should now have a functional GUI.
 
 ## 2 - Some tweaks here and there
