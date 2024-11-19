@@ -89,7 +89,7 @@ Tailored for November 2024 ISO (revised @ 11/19/24).
 
 **Install the base system**
 
-	# pacstrap -K /mnt android-tools android-udev arch-audit arp-scan bat base base-devel btop btrfs-progs curlie croc duf dust eza exfat-utils fastfetch fd fdupes firewalld fio gping grml-zsh-config gvfs-{afc,google,goa,gphoto2,mtp,nfs,smb} hdparm hyperfine intel-ucode inter-font iotop john lazygit linux-firmware linux-zen linux-zen-headers lf lvm2 man-db man-pages mcfly ncdu neovim netscanner networkmanager nmon nmap noto-fonts-{cjk,emoji,extra} nvtop pacman-contrib reflector ripgrep rkhunter sbctl sd sdparm signify smartmontools tcpdump texinfo tldr ttf-mononoki-nerd unrar xdg-user-dirs xfsprogs xh yt-dlp zmap zsh-{autosuggestions,completions,history-substring-search,syntax-highlighting}
+	# pacstrap -K /mnt android-tools android-udev arch-audit arp-scan bat base base-devel btop btrfs-progs curlie croc duf dust eza exfatprogs fastfetch fd fdupes firewalld fio gping grml-zsh-config gvfs-{afc,google,goa,gphoto2,mtp,nfs,smb} hdparm hyperfine intel-ucode inter-font iotop john lazygit linux-firmware linux-zen linux-zen-headers lf lvm2 man-db man-pages mcfly ncdu neovim netscanner networkmanager nmon nmap noto-fonts-{cjk,emoji,extra} nvtop pacman-contrib reflector ripgrep rkhunter sbctl sd sdparm signify smartmontools tcpdump texinfo tldr ttf-mononoki-nerd unrar xdg-user-dirs xfsprogs xh yt-dlp zmap zsh-{autosuggestions,completions,history-substring-search,syntax-highlighting}
 
 **Generate fstab file**
 
@@ -309,7 +309,7 @@ It should be good to go.
 
 **Install GPU, audio and LaTeX packages**
 
-	# pacman -S lib32-nvidia-utils nvidia-dkms nvidia-utils pipewire-{alsa,audio,jack,pulse} texlive-{langenglish,langfrench,meta}
+	# pacman -S lib32-nvidia-utils nvidia-{dkms,utils} pipewire-{alsa,audio,jack,pulse} texlive-{langenglish,langfrench,meta}
 
 **Install virtualisation related packages**
 	
