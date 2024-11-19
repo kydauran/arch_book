@@ -1,13 +1,12 @@
 # Arch_book
 
-Always verify your ISO file (b2sum/sha256 ; gpg/pacman-key).
-I won't cover it because it should be automatic anyway thanks to torrent, however it's good habit to verify everything you download, when it's possible.
+Always verify your ISO file (b2sum/sha256sum ; gpg/pacman-key).
 
 "Trust, but verify" mindset should always be applied.
 
 https://archlinux.org/download/
 
-Tailored for November 2024 ISO (revised @ 11/17/24).
+Tailored for November 2024 ISO (revised @ 11/19/24).
 
 ## 0 - Preliminary steps prior installation
 
@@ -26,7 +25,7 @@ Tailored for November 2024 ISO (revised @ 11/17/24).
 
 	# setfont ter-v24n
 
-**Verify the system is in UEFI mode (should return '64')**
+**Verify that the system is in UEFI mode (should return '64')**
 
 	# cat /sys/firmware/efi/fw_platform_size
 
@@ -34,18 +33,21 @@ Tailored for November 2024 ISO (revised @ 11/17/24).
 
 	# ping -c 5 archlinux.org
 
-**Verify UEFI is in Setup mode, for later**
+**Verify that UEFI is in Setup mode, for Secure Boot setup later on**
 
 	# bootctl status | grep "Secure Boot"
 
 ## 0.5 - Partitionning (encrypted via LVM on LUKS method)
 
+**Partition the disk**
+
 	# fdisk /dev/nvme0n1
 
 +512M (EFI System) > future /boot/ partition (nvme0n1p1)
+
 100%FREE (Linux LVM) > the system with its data (nvme0n1p2)
 
-**Layout setup**
+**Create the LUKS encrypted container at the designated partition**
 
 	# cryptsetup luksFormat /dev/nvme0n1p2
 
@@ -85,9 +87,9 @@ Tailored for November 2024 ISO (revised @ 11/17/24).
 
 	# less /etc/pacman.d/mirrorlist
 
-**Install the base system (please don't get a seizure over this one)**
+**Install the base system**
 
-	# pacstrap -K /mnt base base-devel linux-zen linux-zen-headers linux-firmware yt-dlp nvtop ncdu lf tldr btop arch-audit rkhunter ripgrep duf dust intel-ucode zmap nmap john android-tools android-udev signify fdupes eza bat hdparm sdparm smartmontools fd mcfly sd hyperfine gping xdg-user-dirs curlie xh dog neovim grml-zsh-config lvm2 arp-scan fastfetch tcpdump reflector pacman-contrib man-db man-pages texinfo zsh-{completions,autosuggestions,history-substring-search,syntax-highlighting} networkmanager lazygit gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} croc exfat-utils btrfs-progs xfsprogs firewalld dnsmasq swtpm sbctl inter-font noto-fonts-{cjk,extra,emoji} ttf-mononoki-nerd nmon iotop fio netscanner unrar
+	# pacstrap -K /mnt android-tools android-udev arch-audit arp-scan bat base base-devel btop btrfs-progs curlie croc duf dust eza exfat-utils fastfetch fd fdupes firewalld fio gping grml-zsh-config gvfs-{afc,google,goa,gphoto2,mtp,nfs,smb} hdparm hyperfine intel-ucode inter-font iotop john lazygit linux-firmware linux-zen linux-zen-headers lf lvm2 man-db man-pages mcfly ncdu neovim netscanner networkmanager nmon nmap noto-fonts-{cjk,emoji,extra} nvtop pacman-contrib reflector ripgrep rkhunter sbctl sd sdparm signify smartmontools tcpdump texinfo tldr ttf-mononoki-nerd unrar xdg-user-dirs xfsprogs xh yt-dlp zmap zsh-{autosuggestions,completions,history-substring-search,syntax-highlighting}
 
 **Generate fstab file**
 
@@ -137,7 +139,7 @@ KEYMAP=us
 twirl
 ```
 
-**Uncomment multilib repo and add ILoveCandy to "Misc options" on /etc/pacman.conf**
+**Adjust "Misc options", add "ILoveCandy" beneath them and uncomment "multilib" repo on /etc/pacman.conf**
 
 	# nvim /etc/pacman.conf
 
@@ -172,9 +174,8 @@ Include = /etc/pacman.d/mirrorlist
 	# systemctl enable pcscd
 	# systemctl enable reflector
 	# systemctl enable reflector.timer
- 	# systemctl enable libvirtd
 
-**Uncomment "ForwardToSyslog=no" and replace 'no' by 'yes'**
+**Uncomment "ForwardToSyslog=no" and replace "no" by "yes"**
 
 	# nvim /etc/systemd/journald.conf
 
@@ -211,13 +212,13 @@ Remove any -march and -mtune CFLAGS, then add -march=native in /etc/makepkg.conf
 
 	# CFLAGS="-march=native -O2 -pipe ..."
 
-Add -C target-cpu=native to RUSTFLAGS:
-
-	# RUSTFLAGS="-C opt-level=2 -C target-cpu=native"
-
 Adjust parallel compilation :
 
 	# MAKEFLAGS="-j$(nproc)"
+
+In /etc/makepkg.conf.d/rust.conf, add -C target-cpu=native to RUSTFLAGS:
+
+	# RUSTFLAGS="-C opt-level=2 -C target-cpu=native"
 
 **Modify /etc/mkinitcpio.conf HOOKS**
 
@@ -231,11 +232,11 @@ Adjust parallel compilation :
 
 	# passwd
 
-**Bootloader**
+**Setup the bootloader**
 
 	# bootctl install
 
-**Configure bootloader**
+**Configure the bootloader**
 
 	# nvim /boot/loader/loader.conf
 
@@ -274,7 +275,7 @@ Tip : to get the device-UUID easily, you can run this into nvim or vim :
 
 	# sbctl status
 
-should still return "Setup mode"
+should return "Setup mode : disabled"
 
 **Create keys**
 
@@ -304,27 +305,32 @@ should still return "Setup mode"
 
 	# sbctl status
 
-Should be good to go.
+It should be good to go.
 
-**Install "fire and forget" things**
+**Install GPU,audio and LaTeX packages**
 
-	# pacman -S nvidia-dkms nvidia-utils lib32-nvidia-utils texlive-meta texlive-langfrench texlive-langenglish pipewire-{audio,alsa,pulse,jack}
+	# pacman -S lib32-nvidia-utils nvidia-dkms nvidia-utils pipewire-{alsa,audio,jack,pulse} texlive-{langenglish,langfrench,meta}
 
-**Install apps**
+**Install virtualisation related packages**
+	
+	# pacman -S edk2-ovmf guestfs-tools libosinfo libvirt qemu-full qemu-img swtpm virt-install
 
-	# pacman -S yubikey-manager-qt obs-studio qbittorrent steam krita-plugin-gmic signal-desktop audacity pycharm-community-edition thunar pandoc-cli chromium mkvtoolnix-gui teamspeak3 virt-manager
+**Install GUI apps**
+
+	# pacman -S audacity firefox-i18n-en-us krita-plugin-gmic mkvtoolnix-gui obs-studio pandoc-cli pycharm-community-edition qbittorrent signal-desktop steam teamspeak3 thunar virt-manager virt-viewer yubikey-manager-qt
 
 **Install KDE with its apps (exclude ^5, ^7, ^18 and ^48 from group ; I dont want RDP / flatpak on a mutable system)**
 
-	# pacman -S plasma ark dolphin-plugins gwenview kcalc kdenlive konsole ksystemlog kjournald okular kate spectacle ghostwriter
+	# pacman -S ark dolphin-plugins ghostwriter gwenview kate kcalc kdenlive kjournald konsole ksystemlog okular plasma spectacle
 
 **Enable SDDM at start-up**
 
 	# systemctl enable sddm
 
-**Also Bluetooth**
+**Also Bluetooth and libvirtd**
 
 	# systemctl enable bluetooth
+	# systemctl enable libvirtd
 
 **Activate sudo for wheel usergroup, or use run0**
 
@@ -342,9 +348,7 @@ Should be good to go.
 
 	# su - kydauran
 
-now he's CTRL'd
-
-**Punish root user**
+**Disable root user**
 
 	$ sudo passwd -l root
 	$ sudo passwd -d root
@@ -381,7 +385,7 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 	$ git clone https://github.com/NvChad/starter ~/.config/nvim && nvim
 
-**Install customizable taskbar for KDE**
+**Install customisable taskbar for KDE**
 
 Panel Colorizer is pretty good (via "Install a new widget" within KDE)
 
@@ -395,10 +399,12 @@ FREETYPE_PROPERTIES="cff:no-stem-darkening=0 autofitter:no-stem-darkening=0"
 
 ## 99 - Sources used 
 
+https://wiki.archlinux.org/title/User:Bai-Chiang
+
 https://wiki.archlinux.org/
 
-https://wiki.archlinux.org/title/User:Bai-Chiang/Arch_Linux_installation_with_unified_kernel_image_(UKI),_full_disk_encryption,_secure_boot,_btrfs_snapshots,_and_common_setups
-
 https://wiki.archlinux.org/title/Libvirt
+
+https://gist.github.com/tatumroaquin/c6464e1ccaef40fd098a4f31db61ab22
 
 https://blog.aktsbot.in/no-more-blurry-fonts.html
