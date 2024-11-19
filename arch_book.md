@@ -307,7 +307,7 @@ should return "Setup mode : disabled"
 
 It should be good to go.
 
-**Install GPU,audio and LaTeX packages**
+**Install GPU, audio and LaTeX packages**
 
 	# pacman -S lib32-nvidia-utils nvidia-dkms nvidia-utils pipewire-{alsa,audio,jack,pulse} texlive-{langenglish,langfrench,meta}
 
