@@ -89,7 +89,7 @@ Tailored for November 2024 ISO (revised @ 11/19/24).
 
 **Install the base system**
 
-	# pacstrap -K /mnt android-tools android-udev arch-audit arp-scan bat base base-devel btop btrfs-progs curlie croc duf dust eza exfatprogs fastfetch fd fdupes firewalld fio gping grml-zsh-config gvfs-{afc,google,goa,gphoto2,mtp,nfs,smb} hdparm hyperfine intel-ucode inter-font iotop john lazygit linux-firmware linux-zen linux-zen-headers lf lvm2 man-db man-pages mcfly ncdu neovim netscanner networkmanager nmon nmap noto-fonts-{cjk,emoji,extra} nvtop pacman-contrib reflector ripgrep rkhunter sbctl sd sdparm signify smartmontools tcpdump texinfo tldr ttf-mononoki-nerd unrar xdg-user-dirs xfsprogs xh yt-dlp zmap zsh-{autosuggestions,completions,history-substring-search,syntax-highlighting}
+	# pacstrap -K /mnt android-tools android-udev arch-audit arp-scan bat base base-devel btop btrfs-progs curlie croc duf dust eza exfatprogs fastfetch fd fdupes firewalld fio gping grml-zsh-config gvfs-{afc,google,goa,gphoto2,mtp,nfs,smb} hdparm hyperfine intel-ucode inter-font iotop john lazygit linux-firmware linux-zen linux-zen-headers lf lvm2 man-db man-pages mcfly ncdu neovim netscanner networkmanager networkmanager-openvpn nmon nmap noto-fonts-{cjk,emoji,extra} nvtop pacman-contrib reflector ripgrep rkhunter sbctl sd sdparm signify smartmontools tcpdump texinfo tldr ttf-mononoki-nerd unrar xdg-user-dirs xfsprogs xh yt-dlp zmap zsh-{autosuggestions,completions,history-substring-search,syntax-highlighting}
 
 **Generate fstab file**
 
@@ -313,11 +313,11 @@ It should be good to go.
 
 **Install virtualisation related packages**
 	
-	# pacman -S dnsmasq edk2-ovmf guestfs-tools iptables-nft libosinfo libvirt qemu-full qemu-img swtpm virt-install
+	# pacman -S dnsmasq edk2-ovmf guestfs-tools iptables-nft libosinfo libvirt qemu-full qemu-img swtpm virt-install virt-manager  
 
 **Install GUI apps**
 
-	# pacman -S audacity firefox-i18n-en-us krita-plugin-gmic mkvtoolnix-gui obs-studio pandoc-cli pycharm-community-edition qbittorrent signal-desktop steam teamspeak3 thunar virt-manager virt-viewer yubikey-manager-qt
+	# pacman -S audacity chromium freerdp krita-plugin-gmic libvncserver mkvtoolnix-gui obs-studio pandoc-cli pycharm-community-edition qbittorrent remmina signal-desktop spice-gtk steam teamspeak3 thunar yubikey-manager-qt
 
 **Install KDE with its apps (exclude ^5, ^7, ^18 and ^48 from group ; I dont want RDP / flatpak on a mutable system)**
 
