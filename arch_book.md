@@ -6,7 +6,7 @@ Always verify your ISO file (b2sum/sha256sum ; gpg/pacman-key).
 
 https://archlinux.org/download/
 
-Tailored for November 2024 ISO (revised @ 11/19/24).
+Tailored for November 2024 ISO (revised @ 11/25/24).
 
 ## 0 - Preliminary steps prior installation
 
@@ -275,7 +275,7 @@ Tip : to get the device-UUID easily, you can run this into nvim or vim :
 
 	# sbctl status
 
-should return "Setup mode : disabled"
+should return "Setup mode : enabled"
 
 **Create keys**
 
@@ -332,7 +332,7 @@ It should be good to go.
 	# systemctl enable bluetooth
 	# systemctl enable libvirtd
 
-**Activate sudo for wheel usergroup, or use run0**
+**Activate sudo for wheel usergroup**
 
 	# EDITOR=nvim visudo
 	
