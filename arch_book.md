@@ -6,7 +6,7 @@ Always verify your ISO file.
 
 https://archlinux.org/download/
 
-Tailored for December 2024 ISO (revised @ 12/4/24).
+Tailored for December 2024 ISO (revised @ 12/9/24).
 
 ## 0 - Preliminary steps prior installation
 
@@ -89,7 +89,7 @@ Tailored for December 2024 ISO (revised @ 12/4/24).
 
 **Install the base system**
 
-	# pacstrap -K /mnt android-tools android-udev arch-audit arp-scan bat base base-devel btop btrfs-progs curlie croc duf dust eza exfatprogs fastfetch fd fdupes fio gping grml-zsh-config gvfs-{afc,google,goa,gphoto2,mtp,nfs,smb} hdparm hyperfine intel-ucode inter-font iotop john lazygit linux-firmware linux-zen linux-zen-headers lf lvm2 man-db man-pages mcfly ncdu neovim netscanner networkmanager networkmanager-openvpn nmon nmap noto-fonts-{cjk,emoji,extra} nvtop pacman-contrib reflector ripgrep rkhunter sbctl sd sdparm signify smartmontools tcpdump texinfo tldr ttf-mononoki-nerd unrar xdg-user-dirs xfsprogs xh yt-dlp zmap zsh-{autosuggestions,completions,history-substring-search,syntax-highlighting}
+	# pacstrap -K /mnt android-{tools,udev} arch-audit arp-scan bat base base-devel btop btrfs-progs curlie croc duf dust eza exfatprogs fastfetch fd fdupes fio gping grml-zsh-config gvfs-{afc,google,goa,gphoto2,mtp,nfs,smb} hdparm hyperfine intel-ucode inter-font iotop john lazygit linux-firmware linux-zen linux-zen-headers lf lvm2 man-db man-pages mcfly ncdu neovim netscanner networkmanager networkmanager-openvpn nmon nmap noto-fonts-{cjk,emoji,extra} nvtop pacman-contrib reflector ripgrep rkhunter sbctl sd sdparm signify smartmontools tcpdump texinfo tldr ttf-mononoki-nerd unrar xdg-user-dirs xfsprogs xh yt-dlp zmap zsh-{autosuggestions,completions,history-substring-search,syntax-highlighting}
 
 **Generate fstab file**
 
