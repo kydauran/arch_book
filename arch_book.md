@@ -312,7 +312,7 @@ It should be good to go.
 
 **Install GUI apps**
 
-	# pacman -S audacity chromium firefox-i18n-en-us freerdp krita-plugin-gmic libvncserver mkvtoolnix-gui obs-studio pandoc-cli pycharm-community-edition qbittorrent remmina signal-desktop spice-gtk steam thunar yubikey-manager-qt
+	# pacman -S audacity code firefox-i18n-en-us freerdp krita-plugin-gmic libvncserver mkvtoolnix-gui obs-studio pandoc-cli qbittorrent remmina signal-desktop spice-gtk steam thunar yubikey-manager-qt
 
 **Install KDE with its apps (exclude ^5, ^7, ^18 and ^48 from group ; I dont want RDP server / flatpak)**
 
