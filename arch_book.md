@@ -312,7 +312,7 @@ It should be good to go.
 
 **Install GUI apps**
 
-	# pacman -S audacity code firefox-i18n-en-us freerdp krita-plugin-gmic libvncserver mkvtoolnix-gui obs-studio pandoc-cli qbittorrent remmina signal-desktop spice-gtk steam thunar yubikey-manager-qt
+	# pacman -S audacity firefox-i18n-en-us freerdp krita-plugin-gmic libvncserver mkvtoolnix-gui obs-studio pandoc-cli qbittorrent remmina signal-desktop spice-gtk steam thunar yubikey-manager-qt
 
 **Install KDE with its apps (exclude ^5, ^7, ^18 and ^48 from group ; I dont want RDP server / flatpak)**
 
@@ -391,7 +391,7 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 **Install stuff from AUR**
 
-	$ paru -S android-sdk-build-tools mp3tag mullvad-vpn-bin proton-ge-custom-bin protontricks r2modman-bin teamspeak
+	$ paru -S android-sdk-build-tools mp3tag mullvad-vpn-bin proton-ge-custom-bin protontricks r2modman-bin teamspeak visual-studio-code-bin
 
 ## 99 - Sources used 
 
