@@ -6,7 +6,7 @@ Always verify your ISO file.
 
 https://archlinux.org/download/
 
-Tailored for December 2024 ISO (revised @ 12/9/24).
+Tailored for February 2025 ISO (revised @ 2/18/24).
 
 ## 0 - Preliminary steps prior installation
 
